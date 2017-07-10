@@ -1,0 +1,21 @@
+{
+  "name": "stylus-numcode",
+  "version": "0.0.1",
+  "description": "stylus-numcode =======",
+  "main": "src/index.js",
+  "license": "ISC",
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tabayashi/stylus-numcode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tabayashi/stylus-numcode/issues"
+  },
+  "dependencies": {
+    "StringScanner": "0.0.3",
+    "stylus": "^0.54.5"
+  }
+}
