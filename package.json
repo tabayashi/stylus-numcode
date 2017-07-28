@@ -1,6 +1,6 @@
 {
   "name": "stylus-numcode",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "stylus-numcode =======",
   "main": "src/index.js",
   "license": "ISC",
@@ -15,7 +15,9 @@
     "url": "https://github.com/tabayashi/stylus-numcode/issues"
   },
   "dependencies": {
-    "StringScanner": "0.0.3",
+    "StringScanner": "0.0.3"
+  },
+  "devDependencies": {
     "stylus": "^0.54.5"
   }
 }

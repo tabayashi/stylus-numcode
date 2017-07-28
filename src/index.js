@@ -1,38 +1,37 @@
 'use strict';
+var stylus = require('stylus');
+var utils  = stylus.utils;
+var nodes  = stylus.nodes;
 var StringScanner = require('StringScanner');
 
 function numberCode(cc) {
-  return "\\00" + cc.toString(16);
+  return '\\00' + cc.toString(16);
 }
 
 function char2numberCode(datum) {
   return numberCode(datum.charCodeAt(0));
 }
 
-function charEntity2numberCode(datum) {
-  var maps = require('./map.json');
-  if (datum in maps) {
-    return numberEntity2numCode(maps[datum]);
-  } else {
-    return datum.split('')
-                .map(function(c) {
-                  return char2numberCode(c);
-                }).join('');
-  }
-}
+// function charEntity2numberCode(datum) {
+//   var maps = require('./map.json');
+//   if (datum in maps) {
+//     return numberEntity2numCode(maps[datum]);
+//   }
+//   return datum.split('')
+//               .map(function(c) {
+//                 return char2numberCode(c);
+//               })
+//               .join('');
+// }
 
 function numberEntity2numCode(datum) {
   return numberCode(datum.replace(/(?:^&#|;$)/g, ''));
 }
 
-module.exports = function(text) {
-  var stylus, utils, nodes, ss, token = [];
-  stylus = require('stylus');
-  utils  = stylus.utils;
-  nodes  = stylus.nodes;
+function numcode(text) {
   utils.assertString(text, 'text');
-  ss = new StringScanner(text.string);
-
+  var ss = new StringScanner(text.string);
+  var token = [];
   while (!ss.eos()) {
     if (ss.scan(/(&\w+?;)/)) {
       token.push(cent2nc(ss.captures()[0]));
@@ -46,4 +45,6 @@ module.exports = function(text) {
   }
   token = new nodes.String(token.join(''));
   return token;
-};
+}
+
+module.exports = numcode;
