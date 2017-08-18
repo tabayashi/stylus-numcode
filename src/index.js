@@ -12,17 +12,17 @@ function char2numberCode(datum) {
   return numberCode(datum.charCodeAt(0));
 }
 
-// function charEntity2numberCode(datum) {
-//   var maps = require('./map.json');
-//   if (datum in maps) {
-//     return numberEntity2numCode(maps[datum]);
-//   }
-//   return datum.split('')
-//               .map(function(c) {
-//                 return char2numberCode(c);
-//               })
-//               .join('');
-// }
+function charEntity2numCode(datum) {
+  var maps = require('./map.json');
+  if (datum in maps) {
+    return numberEntity2numCode(maps[datum]);
+  }
+  return datum.split('')
+              .map(function(c) {
+                return char2numberCode(c);
+              })
+              .join('');
+}
 
 function numberEntity2numCode(datum) {
   return numberCode(datum.replace(/(?:^&#|;$)/g, ''));
@@ -34,7 +34,7 @@ function numcode(text) {
   var token = [];
   while (!ss.eos()) {
     if (ss.scan(/(&\w+?;)/)) {
-      token.push(cent2nc(ss.captures()[0]));
+      token.push(charEntity2numCode(ss.captures()[0]));
       continue;
     }
     if (ss.scan(/(&#\d+?;)/)) {
